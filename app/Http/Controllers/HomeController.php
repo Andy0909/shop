@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,8 +13,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $response = $this->curlGet('','http://api.test/test');
-        return 123;
+        return view('home');
     }
 
     /**
@@ -24,7 +23,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -83,27 +82,9 @@ class HomeController extends Controller
         //
     }
 
-    public function curlGet ($data,$route)
+    public function contact_us()
     {
-        try {
-            $curl = curl_init();
-            curl_setopt($curl,CURLOPT_HTTPHEADER,['Content-Type:application/json', 'Accept:application/json']);
-            curl_setopt($curl,CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($curl,CURLOPT_URL, $route);
-            curl_setopt($curl,CURLOPT_CUSTOMREQUEST, 'GET');
-            curl_setopt($curl,CURLOPT_POSTFIELDS, $data);
-
-            $response = curl_exec($curl);
-            $error = curl_error($curl);
-            curl_close($curl);
-            if($error){
-                throw new \Exception($error);
-            }
-            else{
-                return $response;
-            }
-        } catch(\Exception $e){
-            return $e->getMessage();
-        }
+        
+        return view('contactUs');
     }
 }

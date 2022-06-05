@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,6 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class , 'index'])->name('index');
+Route::get('/contact_us', [HomeController::class , 'contact_us'])->name('contact_us');
+Route::post('/login_token',[AuthController::class,'loginToken'])->name('loginToken');
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
