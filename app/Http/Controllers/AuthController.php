@@ -10,6 +10,7 @@ class AuthController extends Controller
     {
         Session::put('token',$request['token']);
         Session::put('name',$request['name']);
+        Session::put('email',$request['email']);
     }
 
     public function logout(Request $request)

@@ -100,17 +100,16 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Orders</a>
+                <a class="nav-link" href="/member">Member</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/orders">Orders</a>
             </li>
             <li class="nav-item dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Category
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdown"></div>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/contact_us">Contact us</a>
@@ -172,6 +171,17 @@
         </div>
     </nav>
     <script>
+        $( document ).ready(function() {
+            $.ajax({
+                method: "GET",
+                url: "http://api.test/api/categories",
+            })
+            .done(function(response){
+                $.each(JSON.parse(JSON.stringify(response)), function(key, value){
+                    $("#dropdown").append(`<a class="dropdown-item" href="/category/${value.slug}">${value.name}</a>`)
+                });
+            })
+        });
         $("#login").click(function() {
             var href = $(this).attr("href")
             $(href).fadeIn(250);
@@ -213,7 +223,8 @@
                         data: {
                             '_token': '{{csrf_token()}}',
                             'token': JSON.parse(JSON.stringify(response)).token,
-                            'name': JSON.parse(JSON.stringify(response)).user
+                            'name': JSON.parse(JSON.stringify(response)).user,
+                            'email': JSON.parse(JSON.stringify(response)).email
                         }
                     })
                     .done(function(){
