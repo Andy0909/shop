@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MemberController;
-
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +19,14 @@ use App\Http\Controllers\MemberController;
 
 
 Route::get('/', [HomeController::class , 'index'])->name('home');
+
 Route::get('/contact_us', [HomeController::class , 'contact_us'])->name('contact_us');
+
 Route::post('/login_token',[AuthController::class,'loginToken'])->name('loginToken');
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+
 Route::get('/member',[MemberController::class,'index'])->name('member');
+
+Route::get('/orders',[OrderController::class,'index'])->name('order');
+Route::post('/add_orders',[OrderController::class,'store'])->name('addOrders');
+Route::post('/delete_orders',[OrderController::class,'destroy'])->name('deleteOrders');
