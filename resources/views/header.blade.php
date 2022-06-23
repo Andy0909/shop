@@ -223,6 +223,7 @@
                         data: {
                             '_token': '{{csrf_token()}}',
                             'token': JSON.parse(JSON.stringify(response)).token,
+                            'user_id': JSON.parse(JSON.stringify(response)).user_id,
                             'name': JSON.parse(JSON.stringify(response)).user,
                             'email': JSON.parse(JSON.stringify(response)).email
                         }

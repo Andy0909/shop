@@ -9,6 +9,7 @@ class AuthController extends Controller
     public function loginToken(Request $request)
     {
         Session::put('token',$request['token']);
+        Session::put('user_id',$request['user_id']);
         Session::put('name',$request['name']);
         Session::put('email',$request['email']);
     }

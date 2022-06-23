@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MemberController extends Controller
 {
@@ -34,7 +35,7 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Session::put('subscribe',$request['category_id']);
     }
 
     /**

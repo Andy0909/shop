@@ -26,6 +26,7 @@ Route::post('/login_token',[AuthController::class,'loginToken'])->name('loginTok
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
 Route::get('/member',[MemberController::class,'index'])->name('member');
+Route::post('/add_subscribe',[MemberController::class,'store'])->name('addSubscribe');
 
 Route::get('/orders',[OrderController::class,'index'])->name('order');
 Route::post('/add_orders',[OrderController::class,'store'])->name('addOrders');
