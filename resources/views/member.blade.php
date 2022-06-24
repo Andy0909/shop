@@ -7,9 +7,11 @@
         @if(Session::has('name'))
             <input type="hidden" id="user_id" value="{{Session::get('user_id')}}">
             <input type="hidden" id="userToken" value="{{Session::get('token')}}">
-            @foreach(Session::get('subscribe') as $item)
-                <input type="hidden" id="subscribeItem{{$item}}" value="{{$item}}">
-            @endforeach
+            @if(Session::has('subscribe'))
+                @foreach(Session::get('subscribe') as $item)
+                    <input type="hidden" id="subscribeItem{{$item}}" value="{{$item}}">
+                @endforeach
+            @endif
             <p>會員名稱：{{Session::get('name')}}</p><br>
             <p>會員信箱：{{Session::get('email')}}</p><br>
             <p>訂閱分類訊息(若您訂閱的分類有新商品上架，會立即通知您)：</p>

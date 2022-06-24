@@ -120,7 +120,8 @@
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form> &nbsp;&nbsp;&nbsp;
           @if(Session::has('name') && Session::has('token'))
-            <input type="text" id="userToken" value="{{Session::get('token')}}" style="display: none">
+            <input type="hidden" id="userToken" value="{{Session::get('token')}}">
+            <input type="hidden" id="user_id" value="{{Session::get('user_id')}}">
             <div class="form-inline my-2 my-lg-0">
                 <button class="btn popup-btn" id="register" href="#register_form" style="display: none">Register</button>&nbsp;&nbsp;
                 <button class="btn popup-btn" id="login" href="#login_form" style="display: none">Login</button>
@@ -217,6 +218,27 @@
             .done(function(response){
                 if(JSON.parse(JSON.stringify(response)).code == 201){
                     alert(JSON.parse(JSON.stringify(response)).user + "您好，您已成功登入了")
+                    var subscribe = new Array();
+                    $.ajax({
+                        method: "GET",
+                        headers: {
+                            "Authorization": "Bearer"+" " + JSON.parse(JSON.stringify(response)).token
+                        },
+                        url: "http://api.test/api/subscribe/" + JSON.parse(JSON.stringify(response)).user_id,
+                    })
+                    .done(function(response){
+                        $.each(JSON.parse(JSON.stringify(response)), function(key, value){
+                            subscribe.push(value.category_id)
+                        })
+                        $.ajax({
+                            url: "/add_subscribe",
+                            method: "POST",
+                            data: {
+                                '_token': '{{csrf_token()}}',
+                                'category_id' : subscribe
+                            }
+                        })
+                    })
                     $.ajax({
                         method: "POST",
                         url: '/login_token',
