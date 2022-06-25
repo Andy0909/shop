@@ -90,4 +90,9 @@ class OrderController extends Controller
         unset($orders[$deleteOrders]);
         Session::put('orders',$orders);
     }
+
+    public function remove()
+    {
+        Session::forget('orders');
+    }
 }

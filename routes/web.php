@@ -31,3 +31,4 @@ Route::post('/add_subscribe',[MemberController::class,'store'])->name('addSubscr
 Route::get('/orders',[OrderController::class,'index'])->name('order');
 Route::post('/add_orders',[OrderController::class,'store'])->name('addOrders');
 Route::post('/delete_orders',[OrderController::class,'destroy'])->name('deleteOrders');
+Route::get('/remove_orders',[OrderController::class,'remove'])->name('removeOrders');
