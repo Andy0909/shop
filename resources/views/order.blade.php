@@ -86,16 +86,22 @@
                             'cart': cart,
                         }
                     })
-
-                    $.ajax({
-                        url: "/remove_orders",
-                        method: "GET",
-                        data: {
-                            '_token': '{{csrf_token()}}',
+                    .done(function(response){
+                        if(JSON.parse(JSON.stringify(response)).code == '200'){
+                            $.ajax({
+                                url: "/remove_orders",
+                                method: "GET",
+                                data: {
+                                    '_token': '{{csrf_token()}}',
+                                }
+                            })
+                            alert(JSON.parse(JSON.stringify(response)).message);
+                            window.location.reload();
+                        }
+                        else{
+                            alert(JSON.parse(JSON.stringify(response)).message);
                         }
                     })
-                    alert(JSON.parse(JSON.stringify(response)).message);
-                    window.location.reload();
                 }
                 else{
                     alert(JSON.parse(JSON.stringify(response)).message);
