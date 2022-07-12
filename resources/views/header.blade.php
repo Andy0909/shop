@@ -179,7 +179,7 @@
             })
             .done(function(response){
                 $.each(JSON.parse(JSON.stringify(response)), function(key, value){
-                    $("#dropdown").append(`<a class="dropdown-item" href="/category/${value.slug}">${value.name}</a>`)
+                    $("#dropdown").append(`<a class="dropdown-item" href="/categories/${value.slug}">${value.name}</a>`)
                 });
             })
         });
